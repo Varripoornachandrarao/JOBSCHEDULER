@@ -1,11 +1,42 @@
 import express from 'express';
 import cors from 'cors';
 import { prisma } from '@job-scheduler/database';
+import helmet from 'helmet';
+
+import { authRoutes } from './auth/routes/auth.routes';
+import { organizationRoutes } from './organizations/routes/organization.routes';
+import { projectRoutes } from './projects/routes/project.routes';
+import { queueRoutes } from './queues/routes/queue.routes';
+
+import { apiRateLimiter } from './middleware/rate-limiters';
+import { requestLogger } from './middleware/request-logger';
+import { errorHandler, notFoundHandler } from './middleware/error-handler';
+import { config } from './config';
 
 const app = express();
 
-app.use(cors());
+// Security & request parsing
+app.use(helmet());
+app.use(
+  cors({
+    origin: config.corsOrigin,
+    credentials: true,
+  }),
+);
 app.use(express.json());
+
+// Logging & rate limiting
+app.use(requestLogger);
+app.use(apiRateLimiter);
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/organizations', organizationRoutes);
+app.use('/api', projectRoutes);
+app.use('/api', queueRoutes);
+
+
+
 
 // Base health check route
 app.get('/health', async (req, res) => {
@@ -16,7 +47,7 @@ app.get('/health', async (req, res) => {
       status: 'UP',
       services: {
         database: 'CONNECTED',
-        api: 'OK'
+        api: 'OK',
       },
       timestamp: new Date().toISOString(),
     });
@@ -25,7 +56,7 @@ app.get('/health', async (req, res) => {
       status: 'DOWN',
       services: {
         database: 'DISCONNECTED',
-        api: 'OK'
+        api: 'OK',
       },
       error: error.message,
       timestamp: new Date().toISOString(),
@@ -33,4 +64,9 @@ app.get('/health', async (req, res) => {
   }
 });
 
+// 404 & centralized error handling
+app.use(notFoundHandler);
+app.use(errorHandler);
+
 export { app };
+
