@@ -8,6 +8,8 @@ import { organizationRoutes } from './organizations/routes/organization.routes';
 import { projectRoutes } from './projects/routes/project.routes';
 import { queueRoutes } from './queues/routes/queue.routes';
 import { jobRoutes } from './jobs/routes/job.routes';
+import { workerRoutes } from './workers/routes/worker.routes';
+
 
 
 import { apiRateLimiter } from './middleware/rate-limiters';
@@ -37,6 +39,8 @@ app.use('/api/organizations', organizationRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', queueRoutes);
 app.use('/api', jobRoutes);
+app.use('/api', workerRoutes);
+
 
 
 

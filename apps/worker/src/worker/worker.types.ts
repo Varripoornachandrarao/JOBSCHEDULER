@@ -1,0 +1,2 @@
+export type BullMQQueueName = string;
+
