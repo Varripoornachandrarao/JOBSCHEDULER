@@ -7,6 +7,8 @@ import { authRoutes } from './auth/routes/auth.routes';
 import { organizationRoutes } from './organizations/routes/organization.routes';
 import { projectRoutes } from './projects/routes/project.routes';
 import { queueRoutes } from './queues/routes/queue.routes';
+import { jobRoutes } from './jobs/routes/job.routes';
+
 
 import { apiRateLimiter } from './middleware/rate-limiters';
 import { requestLogger } from './middleware/request-logger';
@@ -34,11 +36,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/organizations', organizationRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', queueRoutes);
+app.use('/api', jobRoutes);
 
 
 
 
 // Base health check route
+
 app.get('/health', async (req, res) => {
   try {
     // Verify Postgres database connection status

@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "Job Management API",
+    "description": "Postman collection for Job Management endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Create Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/queues/{{queueId}}/jobs",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "queues", "{{queueId}}", "jobs"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"example-job\",\n  \"payload\": {\"foo\": \"bar\"},\n  \"priority\": 1,\n  \"delay\": 5000,\n  \"retryPolicy\": {\n    \"name\": \"default\",\n    \"strategy\": \"EXPONENTIAL\",\n    \"maxAttempts\": 3,\n    \"initialDelayMs\": 1000,\n    \"maxDelayMs\": 10000,\n    \"backoffMultiplier\": 2.0,\n    \"jitter\": true\n  },\n  \"metadata\": {\"source\": \"postman\"}\n}"
+        }
+      }
+    },
+    {
+      "name": "List Jobs in Queue",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/queues/{{queueId}}/jobs",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "queues", "{{queueId}}", "jobs"]
+        }
+      }
+    },
+    {
+      "name": "Get Job",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}"]
+        }
+      }
+    },
+    {
+      "name": "Update Job",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"priority\": 10,\n  \"payload\": {\"updated\": true},\n  \"metadata\": {\"tag\": \"v2\"}\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete Job",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}"]
+        }
+      }
+    },
+    {
+      "name": "Cancel Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}/cancel",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}", "cancel"]
+        }
+      }
+    },
+    {
+      "name": "Retry Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}/retry",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}", "retry"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"attemptCount\": 1\n}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "queueId",
+      "value": ""
+    },
+    {
+      "key": "jobId",
+      "value": ""
+    }
+  ]
+}
+
