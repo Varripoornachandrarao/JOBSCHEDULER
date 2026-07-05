@@ -1,72 +1,84 @@
 # 🚀 Distributed Job Scheduler
 
-A production-inspired distributed task scheduling platform built using **Node.js, TypeScript, Express.js, React, PostgreSQL, Redis, BullMQ, and Prisma ORM**.
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-Backend-000000?logo=express)
+![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-BullMQ-DC382D?logo=redis&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)
+![License](https://img.shields.io/badge/License-MIT-brightgreen)
 
-This project demonstrates the design and implementation of a scalable job scheduling system with authentication, organization-based resource management, distributed workers, job execution tracking, and real-time monitoring.
+A **production-inspired distributed task scheduling platform** built using **Node.js, TypeScript, Express.js, React, PostgreSQL, Redis, BullMQ, Prisma ORM, and Socket.IO**.
 
-> **Project Status:** Phase 1–7 Completed | Phase 8 Partially Implemented
+The project demonstrates the design and implementation of a scalable distributed job scheduling system supporting authentication, organization management, queue management, worker execution, job lifecycle tracking, and real-time monitoring.
 
 ---
 
-# 📌 Table of Contents
+# 📌 Assignment Status
 
-- Overview
-- Features
-- Tech Stack
-- Monorepo Structure
-- Project Modules
-- Getting Started
-- Environment Variables
-- Running the Project
-- Build
-- Current Progress
-- Future Improvements
-- Author
+This repository was developed as part of a **Backend Engineering Recruitment Assignment**.
+
+### Current Progress
+
+| Module | Status |
+|---------|--------|
+| Authentication & Authorization | ✅ Completed |
+| Organization Management | ✅ Completed |
+| Project Management | ✅ Completed |
+| Queue Management | ✅ Completed |
+| Job Management | ✅ Completed |
+| Worker Service | ✅ Completed |
+| Dead Letter Queue (DLQ) API | ✅ Completed |
+| Worker Retry Engine | ⚠️ Partially Implemented |
+
+> **Note:** The repository reflects the current implementation progress submitted for the assignment.
 
 ---
 
 # 📖 Overview
 
-The Distributed Job Scheduler is designed to manage asynchronous background jobs in a scalable and organized manner.
+The Distributed Job Scheduler enables applications to process background tasks asynchronously through distributed workers.
 
-It provides:
+It supports:
 
 - Secure Authentication & Authorization
-- Organization-based Multi-Tenancy
-- Project & Queue Management
-- Distributed Worker Execution
+- Multi-Tenant Organization Management
+- Project Management
+- Queue Management
 - Job Scheduling
-- Execution Tracking
-- Dead Letter Queue (DLQ) Management
+- Distributed Worker Processing
+- Execution History
+- Dead Letter Queue (DLQ)
 - Real-time Monitoring using Socket.IO
 
-The project follows **Clean Architecture** principles and is organized as a **TypeScript Monorepo**.
+The project follows **Clean Architecture** and is organized as a **TypeScript Monorepo**.
 
 ---
 
 # ✨ Features
 
-## Authentication
+## 🔐 Authentication
 
 - JWT Authentication
 - Refresh Token Rotation
-- Secure Password Hashing (bcrypt)
+- Password Hashing (bcrypt)
 - Protected APIs
 - Role-Based Access Control (RBAC)
 
 ---
 
-## Organization Management
+## 🏢 Organization Management
 
-- Create Organizations
-- Update Organizations
-- Delete Organizations
+- Create Organization
+- Update Organization
+- Delete Organization
 - Organization Membership
 - OWNER / ADMIN / MEMBER Roles
 
 ---
 
-## Project Management
+## 📁 Project Management
 
 - Create Projects
 - Update Projects
@@ -75,7 +87,7 @@ The project follows **Clean Architecture** principles and is organized as a **Ty
 
 ---
 
-## Queue Management
+## 📦 Queue Management
 
 - Queue CRUD Operations
 - Pause / Resume Queue
@@ -85,9 +97,9 @@ The project follows **Clean Architecture** principles and is organized as a **Ty
 
 ---
 
-## Job Management
+## ⚙️ Job Management
 
-Supports multiple job types:
+Supports:
 
 - Immediate Jobs
 - Delayed Jobs
@@ -97,25 +109,25 @@ Supports multiple job types:
 Additional Features:
 
 - Job Status Tracking
-- Job Metadata
-- Job Priority
+- Priority
+- Metadata
 - Payload Storage
 - Execution History
 
 ---
 
-## Worker Service
+## 👷 Worker Service
 
 - Distributed BullMQ Workers
 - Worker Registration
 - Worker Heartbeats
 - Job Execution
-- Job Logging
+- Execution Logs
 - Graceful Shutdown
 
 ---
 
-## Dead Letter Queue (DLQ)
+## 📥 Dead Letter Queue (DLQ)
 
 - View Failed Jobs
 - Requeue Failed Jobs
@@ -123,11 +135,11 @@ Additional Features:
 
 ---
 
-## Real-Time Updates
+## 📡 Real-Time Updates
 
-Using Socket.IO:
+Powered by Socket.IO
 
-- Worker Status Updates
+- Worker Status
 - Job Lifecycle Events
 - Heartbeats
 - Execution Notifications
@@ -160,7 +172,7 @@ Using Socket.IO:
 
 ---
 
-# 📁 Monorepo Structure
+# 📂 Monorepo Structure
 
 ```text
 .
@@ -177,7 +189,9 @@ Using Socket.IO:
 └── tsconfig.json
 ```
 
-## Folder Responsibilities
+---
+
+# 📁 Folder Responsibilities
 
 ### apps/api
 
@@ -192,27 +206,33 @@ REST API Gateway responsible for:
 - Dead Letter Queue APIs
 - Socket.IO Server
 
+---
+
 ### apps/worker
 
-Background worker responsible for:
+Background Worker responsible for:
 
 - Processing BullMQ Jobs
+- Worker Heartbeats
 - Updating Job Status
 - Writing Execution Logs
-- Worker Heartbeats
+
+---
 
 ### apps/web
 
-React Dashboard providing:
+Dashboard providing:
 
 - Queue Monitoring
+- Worker Monitoring
 - Job Monitoring
-- Worker Status
 - Real-time Updates
+
+---
 
 ### packages/database
 
-Shared database package containing:
+Shared Prisma package containing:
 
 - Prisma Schema
 - Prisma Client
@@ -231,9 +251,7 @@ Shared database package containing:
 
 ---
 
-## Installation
-
-Clone the repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/Varripoornachandrarao/JOBSCHEDULER.git
@@ -241,7 +259,9 @@ git clone https://github.com/Varripoornachandrarao/JOBSCHEDULER.git
 cd JOBSCHEDULER
 ```
 
-Install dependencies
+---
+
+## Install Dependencies
 
 ```bash
 npm install
@@ -276,7 +296,7 @@ Generate Prisma Client
 npm run db:generate
 ```
 
-Run database migrations
+Run Database Migrations
 
 ```bash
 npm run db:migrate
@@ -296,13 +316,13 @@ docker-compose up -d
 
 # ▶ Running the Project
 
-## API
+## API Gateway
 
 ```bash
 npm run dev:api
 ```
 
-Default:
+Runs at:
 
 ```
 http://localhost:3001
@@ -310,7 +330,7 @@ http://localhost:3001
 
 ---
 
-## Worker
+## Worker Service
 
 ```bash
 npm run dev:worker
@@ -324,7 +344,7 @@ npm run dev:worker
 npm run dev:web
 ```
 
-Default:
+Runs at:
 
 ```
 http://localhost:3000
@@ -334,7 +354,7 @@ http://localhost:3000
 
 # 🏗 Build
 
-Build all workspaces
+Build the complete workspace
 
 ```bash
 npm run build
@@ -342,7 +362,7 @@ npm run build
 
 ---
 
-# 📈 Current Progress
+# 📊 Current Progress
 
 | Module | Status |
 |---------|--------|
@@ -366,9 +386,9 @@ Planned enhancements include:
 - Automatic Dead Letter Queue Processing
 - Workflow Dependencies
 - Queue Analytics Dashboard
-- Distributed Worker Auto Scaling
+- Worker Auto Scaling
 - Monitoring & Alerting
-- Metrics Dashboard
+- Performance Metrics Dashboard
 
 ---
 
@@ -376,7 +396,7 @@ Planned enhancements include:
 
 Contributions, suggestions, and feedback are welcome.
 
-Feel free to fork the repository and create a pull request.
+Feel free to fork this repository and submit a pull request.
 
 ---
 
@@ -384,15 +404,26 @@ Feel free to fork the repository and create a pull request.
 
 **Poorna Chandra Rao Varri**
 
+B.Tech Computer Science and Engineering
+
 SRM Institute of Science and Technology
 
-GitHub:
+GitHub Profile:
 
 https://github.com/Varripoornachandrarao
+
+Project Repository:
+
+https://github.com/Varripoornachandrarao/JOBSCHEDULER
+
+---
+
+# 📄 License
+
+This project is released under the **MIT License**.
 
 ---
 
 # ⭐ Acknowledgements
 
-This project was developed as part of a backend engineering recruitment assignment to demonstrate scalable distributed system design, clean architecture principles, and modern TypeScript development practices.
-*(Runs by default at http://localhost:3000)*
+This project was developed as part of a **Backend Engineering Recruitment Assignment** to demonstrate distributed systems design, scalable backend development, clean architecture principles, and modern TypeScript application development.
